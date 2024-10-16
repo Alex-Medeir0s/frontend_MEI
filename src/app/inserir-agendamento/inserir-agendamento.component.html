@@ -1,10 +1,11 @@
 <div class="container">
     <br>
-    <h3>Inserir Novo Agendamento</h3>
+    <h3>Inserir Agendamento</h3>
     <br>
 
     <form (ngSubmit)="onSubmit()">
 
+        <!-- Dados do Agendamento -->
         <div class="form-group row">
             <div class="col-4">
                 <label for="titulo_do_servico">Título do Serviço</label>
@@ -13,9 +14,6 @@
                     Título do Serviço é obrigatório.
                 </div>
             </div>
-        </div>
-
-        <div class="form-group row">
             <div class="col-4">
                 <label for="telefone">Telefone</label>
                 <input type="text" class="form-control" id="telefone" name="telefone" [(ngModel)]="agendamento.telefone" required>
@@ -23,9 +21,6 @@
                     Telefone é obrigatório.
                 </div>
             </div>
-        </div>
-
-        <div class="form-group row">
             <div class="col-4">
                 <label for="email">Email</label>
                 <input type="email" class="form-control" id="email" name="email" [(ngModel)]="agendamento.email" required>
@@ -43,9 +38,6 @@
                     Data e Hora de Início é obrigatório.
                 </div>
             </div>
-        </div>
-
-        <div class="form-group row">
             <div class="col-4">
                 <label for="data_e_hora_fim">Data e Hora de Fim</label>
                 <input type="datetime-local" class="form-control" id="data_e_hora_fim" name="data_e_hora_fim" [(ngModel)]="agendamento.data_e_hora_fim" required>
@@ -53,9 +45,6 @@
                     Data e Hora de Fim é obrigatório.
                 </div>
             </div>
-        </div>
-
-        <div class="form-group row">
             <div class="col-4">
                 <label for="observacao">Observação</label>
                 <input type="text" class="form-control" id="observacao" name="observacao" [(ngModel)]="agendamento.observacao" required>
@@ -66,6 +55,78 @@
         </div>
 
         <br>
+
+        <!-- Seção de Endereço -->
+        <h3>Endereço do Cliente</h3>
+        <div class="form-group row">
+            <div class="col-4">
+                <label for="cep">CEP</label>
+                <input type="text" class="form-control" id="cep" name="cep" [(ngModel)]="agendamento.endereco.cep" (blur)="buscarCep()" required>
+            </div>
+            <div class="col-4">
+                <label for="logradouro">Logradouro</label>
+                <input type="text" class="form-control" id="logradouro" name="logradouro" [(ngModel)]="agendamento.endereco.logradouro" required>
+            </div>
+            <div class="col-4">
+                <label for="numero">Número</label>
+                <input type="text" class="form-control" id="numero" name="numero" [(ngModel)]="agendamento.endereco.numero" required>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-4">
+                <label for="complemento">Complemento</label>
+                <input type="text" class="form-control" id="complemento" name="complemento" [(ngModel)]="agendamento.endereco.complemento">
+            </div>
+            <div class="col-4">
+                <label for="bairro">Bairro</label>
+                <input type="text" class="form-control" id="bairro" name="bairro" [(ngModel)]="agendamento.endereco.bairro" required>
+            </div>
+            <div class="col-4">
+                <label for="cidade">Cidade</label>
+                <input type="text" class="form-control" id="cidade" name="cidade" [(ngModel)]="agendamento.endereco.cidade" required>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-4">
+                <label for="uf">UF</label>
+                <select class="form-control" id="uf" name="uf" [(ngModel)]="agendamento.endereco.uf" required>
+                    <option value="" disabled selected>Selecione o estado</option>
+                    <option value="AC">Acre (AC)</option>
+                    <option value="AL">Alagoas (AL)</option>
+                    <option value="AP">Amapá (AP)</option>
+                    <option value="AM">Amazonas (AM)</option>
+                    <option value="BA">Bahia (BA)</option>
+                    <option value="CE">Ceará (CE)</option>
+                    <option value="DF">Distrito Federal (DF)</option>
+                    <option value="ES">Espírito Santo (ES)</option>
+                    <option value="GO">Goiás (GO)</option>
+                    <option value="MA">Maranhão (MA)</option>
+                    <option value="MT">Mato Grosso (MT)</option>
+                    <option value="MS">Mato Grosso do Sul (MS)</option>
+                    <option value="MG">Minas Gerais (MG)</option>
+                    <option value="PA">Pará (PA)</option>
+                    <option value="PB">Paraíba (PB)</option>
+                    <option value="PR">Paraná (PR)</option>
+                    <option value="PE">Pernambuco (PE)</option>
+                    <option value="PI">Piauí (PI)</option>
+                    <option value="RJ">Rio de Janeiro (RJ)</option>
+                    <option value="RN">Rio Grande do Norte (RN)</option>
+                    <option value="RS">Rio Grande do Sul (RS)</option>
+                    <option value="RO">Rondônia (RO)</option>
+                    <option value="RR">Roraima (RR)</option>
+                    <option value="SC">Santa Catarina (SC)</option>
+                    <option value="SP">São Paulo (SP)</option>
+                    <option value="SE">Sergipe (SE)</option>
+                    <option value="TO">Tocantins (TO)</option>
+                </select>
+            </div>
+        </div>
+
+        <br>
+
+        <!-- Botões de Ação -->
         <div class="form-group row">
             <div class="col-4">
                 <button class="btn btn-info" type="submit">Salvar</button>

@@ -1,37 +1,38 @@
-<h2 class="text-center">Lista de Servicos</h2>
+<h2 class="text-center">Lista de Serviços</h2>
 <div class="container">
     <table class="table table-striped">
+        
         <thead>
             <tr>
                 <th>Código</th>
                 <th>Título do Serviço</th>
-                <th>Valor</th>
+                <th>Valor do Serviço</th>
+                <th>Descrição do Serviço</th>
                 <th>Status</th>
-                <th>Descrição</th>
                 <th>Ações</th>
             </tr>
         </thead>
 
         <tbody>
             <tr *ngFor="let servico of servicos">
-              <th scope="row">{{ servico.codigo }}</th>
-              <td>{{ servico.tituloServico }}</td>
-              <!-- Substitua com o nome do cliente quando disponível -->
-
-              <td>{{ servico.valorServico | currency:'BRL' }}</td>
-              <td>{{ servico.status }}</td>
-              <td>{{ servico.descricaoServico }}</td>
-              <!-- <td>{{servico.}}</td> -->
+                <td>{{ servico.codigo }}</td>
+                <td>{{ servico.tituloServico }}</td>
+                <td>{{ servico.valorServico }}</td>
+                <td>{{ servico.descricaoServico }}</td>
+                <td>{{ servico.status }}</td>
                 <td>
-                  <button class="btn btn-info" style="margin-left: 10px;"(click)="alterarServico(servico.codigo)">Alterar</button>
-                  <button type="button" class="btn btn-danger" (click)="excluirServico(servico.codigo)">Excluir</button>
+                    <button (click)="alterarServico(servico.codigo)" class="btn btn-info" style="margin-left: 10px;">Alterar</button>
+                    <button (click)="excluirServico(servico.codigo)" class="btn btn-danger" style="margin-left: 10px;">Excluir</button>
                 </td>
+
             </tr>
         </tbody>
     </table>
 
     <br>
 
-    <button (click)="incluirServico()"  class="btn btn-info" style="margin-left: 10px;">Inserir Novo Agendamento</button>
-    <button (click)="retornar()" class="btn btn-success" style="margin-left: 10px;">Voltar</button>
+    <button (click) = "inserirServico()" class="btn btn-info" style="margin-left: 10px;">Inserir Novo Serviço</button>
+    <button (click)="Retornar()" class="btn btn-success" style="margin-left: 10px;">Voltar</button>
+
+
 </div>

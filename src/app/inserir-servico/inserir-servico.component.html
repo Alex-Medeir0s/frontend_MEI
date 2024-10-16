@@ -1,64 +1,53 @@
 <div class="container">
-  <br>
-  <h3>Cadastrar Serviço</h3>
-  <br>
-
-  <form (ngSubmit)="onSubmit()" #serviceForm="ngForm">
-      <div class="form-group row">
-          <div class="col-4">
-              <label for="tituloServico">Título</label>
-              <input type="text" id="tituloServico" class="form-control" placeholder="Desktop com defeito" [(ngModel)]="servico.tituloServico" name="tituloServico" required>
-              <!-- <div *ngIf="serviceForm.submitted && !serviceForm.form.controls.tituloServico?.valid" class="text-danger">
-                  Título é obrigatório.
-              </div> -->
-          </div>
-      </div>
-
-      <div class="form-group row">
-          <div class="col-4">
-              <label for="cliente">Nome Cliente</label>
-              <input type="text" id="cliente" class="form-control" placeholder="Marcelo Freitas"  name="cliente" required>
-              <!-- <div *ngIf="serviceForm.submitted && !serviceForm.form.controls.cliente?.valid" class="text-danger">
-                  Nome do cliente é obrigatório.
-              </div> -->
-          </div>
-      </div>
-
-      <div class="form-group row">
-          <div class="col-4">
-              <label for="valorServico">Valor</label>
-              <input type="number" id="valorServico" class="form-control" placeholder="R$ 00,00" [(ngModel)]="servico.valorServico" name="valorServico" required>
-              <!-- <div *ngIf="serviceForm.submitted && !serviceForm.form.controls.valorServico?.valid" class="text-danger">
-                  Valor é obrigatório e deve ser numérico.
-              </div> -->
-          </div>
-      </div>
-
-      <div class="form-group row">
-          <div class="col-4">
-              <label for="status">Status</label>
-              <select id="status" class="form-control" [(ngModel)]="servico.status" name="status">
-                  <option value="Cadastrado">Cadastrado</option>
-                  <option value="Em Andamento">Em Andamento</option>
-                  <option value="Finalizado">Finalizado</option>
-              </select>
-          </div>
-      </div>
-
-      <div class="form-group row">
-          <div class="col-4">
-              <label for="descricaoServico">Descrição</label>
-              <textarea id="descricaoServico" class="form-control" rows="3" placeholder="Descrição do serviço..." [(ngModel)]="servico.descricaoServico" name="descricaoServico" required></textarea>
-          </div>
-      </div>
-
-      <br>
-      <div class="form-group row">
-          <div class="col-4">
-              <button type="submit" class="btn btn-info">Cadastrar</button>
-              <button class="btn btn-success" (click)="retornar()" style="margin-left: 10px;">Cancelar</button>
-          </div>
-      </div>
-  </form>
+    <h3>Inserir Serviço</h3>
+    <form (ngSubmit)="onSubmit()">
+        <div class="form-group row">
+            <div class="col-6">
+                <label for="tituloServico">Título do Serviço</label>
+                <input type="text" class="form-control" id="tituloServico" name="tituloServico" [(ngModel)]="servico.tituloServico" required>
+                <div *ngIf="!servico.tituloServico" class="alert alert-danger">
+                    Título do Serviço é obrigatório.
+                </div>
+                    <br>
+                </div>
+                <div class="col-6">
+                    <label for="tituloServico">Valor</label>
+                    <input type="text" class="form-control" id="valorServico" name="valorServico" [(ngModel)]="servico.valorServico" required>
+                    <div *ngIf="!servico.valorServico" class="alert alert-danger">
+                        Valor do Serviço é obrigatório.
+                    </div>
+                    <br>
+                </div>
+                <div class="col-6">
+                    <label for="descricaoServico">Descrição</label>
+                    <input type="text" class="form-control" id="descricaoServico" name="descricaoServico" [(ngModel)]="servico.descricaoServico" required>
+                    <div *ngIf="!servico.descricaoServico" class="alert alert-danger">
+                        Descrição do Serviço é obrigatório.
+                    </div>
+                    <br>
+                </div>
+                <div class="col-6">
+                    <label for="status">Status</label>
+                    <input type="text" class="form-control" id="status" name="status" [(ngModel)]="servico.status" required>
+                    <div *ngIf="!servico.status" class="alert alert-danger">
+                        Status é obrigatório.
+                    </div>
+                </div>
+            </div>
+        
+        <br>
+        <br>
+        <div class="form-group row">
+            <div class="col-6">
+                <button class="btn btn-info" type="submit">Salvar</button>
+                <button class="btn btn-success" style="margin-left: 10px;" routerLink="/listar-servicos">Voltar</button>
+            </div>
+        </div>
+    </form>
 </div>
 
+<!-- codigo!: number;
+tituloServico!: string;
+valorServico!: number;
+descricaoServico!: string;
+status!: string; -->

@@ -1,0 +1,60 @@
+<div class="container">
+    <h3>Alterar Serviço</h3>
+    <form (ngSubmit)="onSubmit()">
+        <div class="form-group row">
+            <div class="col-6">
+                <label for="tituloServico">Título do Serviço</label>
+                <input type="text" class="form-control" id="tituloServico" name="tituloServico" [(ngModel)]="servico.tituloServico" required>
+                <div *ngIf="!servico.tituloServico" class="alert alert-danger">
+                    Título do Serviço é obrigatório.
+                </div>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="form-group row">
+            <div class="col-6">
+                <label for="valorServico">Valor</label>
+                <input type="text" class="form-control" id="valorServico" name="valorServico" [(ngModel)]="servico.valorServico" required>
+                <div *ngIf="!servico.valorServico" class="alert alert-danger">
+                    Valor do Serviço é obrigatório.
+                </div>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="form-group row">
+            <div class="col-6">
+                <label for="descricaoServico">Descrição</label>
+                <input type="text" class="form-control" id="descricaoServico" name="descricaoServico" [(ngModel)]="servico.descricaoServico" required>
+                <div *ngIf="!servico.descricaoServico" class="alert alert-danger">
+                    Descrição do Serviço é obrigatória.
+                </div>
+            </div>
+        </div>
+
+        <br>
+
+        <!-- Caso queira reativar o campo de seleção de pessoa, remova os comentários -->
+        <!--
+        <div class="form-group row">
+            <div class="col-4">
+                <label>Pessoa</label>
+                <select class="form-control" id="pessoa" name="pessoa" [(ngModel)]="servico.pessoa.codigo">
+                    <option value="" disabled>Selecione Pessoa</option>
+                    <option *ngFor="let pessoa of pessoas" [ngValue]="pessoa.codigo">{{ pessoa.nome }}</option>
+                </select>
+            </div>
+        </div>
+        -->
+
+        <div class="form-group row">
+            <div class="col-6">
+                <button class="btn btn-info" type="submit">Salvar</button>
+                <button (click)="listarServicos()" class="btn btn-success" style="margin-left: 10px;">Voltar</button>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Servico } from '../model/servico';
 import { ServicoService } from '../services/servico.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-inserir-servico',
@@ -9,24 +9,40 @@ import { Router } from '@angular/router';
   styleUrls: ['./inserir-servico.component.css']
 })
 export class InserirServicoComponent implements OnInit {
-  codigo!: number;
-  servico: Servico = new Servico();
 
-  constructor(private servicoService: ServicoService, private router: Router) { }
+  servico: Servico = new Servico();
+  // pessoas!: Pessoa[];
+
+  // constructor( private EquipamentoService: EquipamentoService, private PessoaService: PessoaService, private router: Router) { }
+  constructor( private ServicoService: ServicoService, private router: Router) { }
 
   ngOnInit(): void {
 
+    // this.listarPessoas();
+
   }
 
-  retornar() {
-    this.router.navigate(['listar-servicos']);
+  // private listarPessoas(){
+  //   this.PessoaService.listarPessoas().subscribe(data => {
+  //     this.pessoas = data;
+  //   });
+  // }
+
+
+
+  onSubmit(){
+    this.InserirServico();
   }
 
-  onSubmit() {
+  InserirServico(){
     this.servico.codigo = 0;
-    this.servicoService.incluirServico(this.servico).subscribe(data => {
+    this.ServicoService.incluirServico(this.servico).subscribe(data => {
       console.log(data);
-      this.retornar();
-    });
+      this.listarServicos();
+    })
+  }
+
+  listarServicos(){
+    this.router.navigate(['listar-servicos']);
   }
 }
