@@ -1,3 +1,6 @@
+// import { Cliente } from "./cliente";
+// import { Endereco } from "./endereco";
+
 export class Agendamento {
     codigo!: number;
     titulo_do_servico!: string;
@@ -6,7 +9,7 @@ export class Agendamento {
     data_e_hora_inicio!: string;
     data_e_hora_fim!: string;
     observacao!: string;
-    endereco!: string;
-    cliente!: string;
+    // endereco!: Endereco;
+    // cliente!: Cliente;
 
 }
