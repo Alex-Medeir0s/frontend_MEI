@@ -13,7 +13,6 @@ import { ViaCepService } from '../services/viacep/via-cep.service';
 })
 export class InserirAgendamentoComponent implements OnInit {
 
-  codigo!: number;
   agendamento: Agendamento = new Agendamento();
   
   constructor(
@@ -27,7 +26,7 @@ export class InserirAgendamentoComponent implements OnInit {
   }
 
   buscarCep() {
-    const cep = this.agendamento.endereco.cep.replace(/\D/g, ''); // Remove caracteres não numéricos
+    const cep = this.agendamento.endereco.cep ? this.agendamento.endereco.cep.replace(/\D/g, '') : ''; // Remove caracteres não numéricos
     if (cep.length === 8) {
       this.viaCepService.buscarCep(cep).subscribe(
         (data) => {
@@ -44,6 +43,8 @@ export class InserirAgendamentoComponent implements OnInit {
           console.error('Erro ao buscar CEP:', error);
         }
       );
+    } else {
+      alert('CEP inválido.');
     }
   }
 
@@ -57,6 +58,9 @@ export class InserirAgendamentoComponent implements OnInit {
       (data) => {
         console.log(data);
         this.retornar();
+      },
+      (error) => {
+        console.error('Erro ao incluir agendamento:', error);
       }
     );
   }
