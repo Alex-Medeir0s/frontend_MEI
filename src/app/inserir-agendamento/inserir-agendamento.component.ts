@@ -5,6 +5,7 @@ import { Agendamento } from '../model/agendamento';
 import { Endereco } from '../model/endereco';
 import { AgendamentoService } from '../services/agendamento.service';
 import { ViaCepService } from '../services/viacep/via-cep.service';
+import { EnderecoService } from '../services/endereco/endereco.service';
 
 @Component({
   selector: 'app-inserir-agenda',
@@ -14,10 +15,11 @@ import { ViaCepService } from '../services/viacep/via-cep.service';
 export class InserirAgendamentoComponent implements OnInit {
 
   agendamento: Agendamento = new Agendamento();
-  
+
   constructor(
-    private agendamentoService: AgendamentoService, 
-    private router: Router, 
+    private agendamentoService: AgendamentoService,
+    private enderecoService: EnderecoService, // Injetar o serviço de endereço
+    private router: Router,
     private viaCepService: ViaCepService
   ) {}
 
@@ -26,7 +28,7 @@ export class InserirAgendamentoComponent implements OnInit {
   }
 
   buscarCep() {
-    const cep = this.agendamento.endereco.cep ? this.agendamento.endereco.cep.replace(/\D/g, '') : ''; // Remove caracteres não numéricos
+    const cep = this.agendamento.endereco.cep ? this.agendamento.endereco.cep.replace(/\D/g, '') : '';
     if (cep.length === 8) {
       this.viaCepService.buscarCep(cep).subscribe(
         (data) => {
@@ -53,14 +55,35 @@ export class InserirAgendamentoComponent implements OnInit {
   }
 
   onSubmit() {
-    this.agendamento.codigo = 0;
-    this.agendamentoService.incluirAgendamento(this.agendamento).subscribe(
-      (data) => {
-        console.log(data);
-        this.retornar();
+    // Certifique-se de validar os campos obrigatórios antes de enviar
+    if (!this.agendamento.titulo_do_servico || !this.agendamento.telefone || !this.agendamento.email) {
+      alert('Preencha todos os campos obrigatórios!');
+      return;
+    }
+
+    // Cadastro do endereço
+    this.enderecoService.cadastrar(this.agendamento.endereco).subscribe(
+      (enderecoResponse) => {
+        if (enderecoResponse && enderecoResponse.codigo) {
+          // Atualizar o ID do endereço no agendamento
+          this.agendamento.endereco.codigo = enderecoResponse.codigo;
+
+          // Enviar o agendamento com o endereço associado
+          this.agendamentoService.incluirAgendamento(this.agendamento).subscribe(
+            (response) => {
+              console.log('Agendamento salvo com sucesso', response);
+              this.router.navigate(['/agendamentos']);
+            },
+            (error) => {
+              console.error('Erro ao salvar agendamento', error);
+            }
+          );
+        } else {
+          console.error('Erro ao cadastrar endereço: resposta inválida', enderecoResponse);
+        }
       },
       (error) => {
-        console.error('Erro ao incluir agendamento:', error);
+        console.error('Erro ao cadastrar endereço', error);
       }
     );
   }
